@@ -1,0 +1,213 @@
+/* Outer container for the navigation bar */
+.outer-div {
+  width: 100vw;
+  height: 70px;
+  padding: 10px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  position: fixed;
+ top: 0;
+  left: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Transparent navbar */
+.outer-div.transparent {
+  background-color: rgba(0, 0, 0, 0.9);
+  box-shadow: none;
+}
+
+/* Solid background when scrolled */
+.outer-div.scrolled {
+  background-color: hsl(211, 77%, 10%);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Flex container for the image and text items */
+.inner-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+/* Logo section */
+.image-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+}
+
+.image {
+  height: 5px;
+  object-fit: contain;
+}
+
+/* Hamburger menu icon */
+.hamburger-menu {
+  display: none;
+  flex-direction: column;
+  gap: 4px;
+  cursor: pointer;
+}
+
+.hamburger-menu div {
+  width: 30px;
+  height: 3px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+/* Menu items section */
+.text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  flex-grow: 1;
+}
+
+/* Menu item styles */
+.text-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+  height: 38px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  text-decoration: none; /* Remove default underline from Link */
+}
+
+/* Ensure the Link itself doesn't have default styling */
+.text-item a {
+  text-decoration: none; /* Remove default underline */
+}
+
+/* Hover effect for the text content */
+.text-item:hover .text-content {
+  color: hsl(168, 76%, 60%);
+}
+
+/* Restore the animated underline effect on hover */
+.text-item:hover::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background-color: hsl(168, 76%, 60%);
+  transition: width 0.3s ease;
+}
+
+.text-item::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: hsl(168, 76%, 60%);
+  transition: width 0.3s ease;
+}
+
+/* Selected state styling */
+.text-item.selected .text-content {
+  color: hsl(168, 76%, 60%);
+}
+
+.text-item.selected::after {
+  width: 100%; /* Show underline for selected item */
+}
+
+/* Text content styles */
+.text-content {
+  text-align: center;
+  color: white;
+  font-size: 20px;
+  font-family: "Orienta", sans-serif;
+  font-weight: 400;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .image-container {
+    display: none;
+  }
+
+  .text-container {
+    display: none;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    padding: 20px 0;
+  }
+
+  .text-item {
+    width: 100%;
+    padding: 5px 0;
+    text-align: center;
+  }
+
+  .text-content {
+    font-size: 18px;
+  }
+
+  .hamburger-menu {
+    display: flex;
+  }
+
+  .text-container.open {
+    display: flex;
+  }
+
+  .hamburger-menu.open div:nth-child(1) {
+    transform: rotate(45deg);
+    position: relative;
+    top: 6px;
+  }
+  
+  .hamburger-menu.open div:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger-menu.open div:nth-child(3) {
+    transform: rotate(-45deg);
+    position: relative;
+    top: -6px;
+  }
+  /* Sign In / Login buttons styling */
+.sign-btn, .login-btn {
+  border: 1px solid hsl(168, 76%, 60%);
+  border-radius: 5px;
+  padding: 5px 12px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sign-btn:hover, .login-btn:hover {
+  background-color: hsl(168, 76%, 60%);
+  color: black;
+}
+
+/* Adjust spacing between nav items and buttons */
+.text-container .sign-btn {
+  margin-left: 20px;
+}
+
+.text-container .login-btn {
+  margin-left: 10px;
+}
+
+
+}

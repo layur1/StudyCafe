@@ -1,0 +1,108 @@
+.explore-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  padding: 100px 40px 40px; /* Increased top padding to avoid navbar overlap */
+  justify-items: center;
+  background-color: #f8f9fa;
+}
+
+.image-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 15px;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  overflow: hidden;
+  max-width: 500px; /* Increased max width of the image box */
+  border: none;
+}
+
+.image-box:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Added box-shadow for hover */
+}
+
+.image-box img {
+  width: 100%;
+  max-width: 450px;
+  height: auto;
+  border-radius: 0px; /* Sharper corners */
+  object-fit: cover;
+  border: none;
+}
+
+.image-title {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #061A2F;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.image-description {
+  margin-top: 10px;
+  font-size: 1rem;
+  color: #34495E; /* Darker shade for the description */
+  line-height: 1.5;
+  padding: 0 10px;
+  font-style: italic;
+  text-align: left; /* Default to left alignment */
+}
+
+.left-align {
+  text-align: left;
+}
+
+.right-align {
+  text-align: right;
+}
+
+/* Styles for the boxes under the images */
+.boxes-container {
+  display: flex;
+  justify-content: space-between; /* Spaces out the boxes evenly */
+  gap: 15px;
+  margin-top: 15px;
+  width: 100%; /* Ensures the container takes full width */
+  align-items: flex-start; /* Aligns the boxes to the top of the container */
+}
+
+.box-item {
+  background-color: hsl(211, 77%, 10%); /* Dark blue color */
+  color: #fff;
+  padding: 12px 15px;  /* Reduced padding */
+  width: 140px;  /* Reduced width */
+  height: 160px; /* Reduced height */
+  border-radius: 0px; /* Sharp corners (removed rounded edges) */
+  font-weight: bold;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+/* Ensure all boxes have the same height */
+.box-item-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;  /* Align all boxes to the top */
+}
+
+.box-item-wrapper .box-item {
+  flex-grow: 1;
+  height: 160px; /* Consistent height */
+}
+
+.box-item-wrapper .box-item:nth-child(1),
+.box-item-wrapper .box-item:nth-child(2) {
+  margin-right: 10px; /* Adjust spacing for boxes on the right side */
+}
+
+.box-item:hover {
+  transform: scale(1.05);
+}

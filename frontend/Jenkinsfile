@@ -1,0 +1,60 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKERHUB_USERNAME = 'layur1'
+        IMAGE_NAME = 'studycafe-frontend'
+        IMAGE_TAG = "${BUILD_NUMBER}"
+        FULL_IMAGE_NAME = "${DOCKERHUB_USERNAME}/${IMAGE_NAME}"
+    }
+
+    stages {
+
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+
+        stage('Build Docker Image') {
+            steps {
+                sh '''
+                    docker build -t ${FULL_IMAGE_NAME}:${IMAGE_TAG} -f frontend/Dockerfile frontend
+                    docker tag ${FULL_IMAGE_NAME}:${IMAGE_TAG} ${FULL_IMAGE_NAME}:latest
+                '''
+            }
+        }
+
+        stage('Login to Docker Hub') {
+            steps {
+                withCredentials([usernamePassword(
+                    credentialsId: 'dockerhub-credentials',
+                    usernameVariable: 'DOCKER_USER',
+                    passwordVariable: 'DOCKER_PASS'
+                )]) {
+                    sh '''
+                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                    '''
+                }
+            }
+        }
+
+        stage('Push Image') {
+            steps {
+                sh '''
+                    docker push ${FULL_IMAGE_NAME}:${IMAGE_TAG}
+                    docker push ${FULL_IMAGE_NAME}:latest
+                '''
+            }
+        }
+    }
+
+    post {
+        success {
+            echo '✅ Jenkins pipeline completed successfully'
+        }
+        failure {
+            echo '❌ Jenkins pipeline failed'
+        }
+    }
+}

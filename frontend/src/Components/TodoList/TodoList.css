@@ -1,0 +1,213 @@
+:root {
+  --primary-color: #1abc9c;
+  --secondary-color: #061a2f;
+  --accent-color: #3498db;
+  --completed-color: #7f8c8d;
+  --background-color: #f7f7f7;
+  --text-color: #34495e;
+  --white: #ffffff;
+  --hover-color: #3e8e41;
+}
+
+/* 🔹 Reset and ensure proper layout */
+body {
+  font-family: 'Arial', sans-serif;
+  background: var(--background-color);
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* 🔹 Align to top instead of center */
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+/* 🔹 Main container */
+.todo-container {
+  max-width: 500px;
+  width: 100%;
+  padding: 20px;
+  background: var(--white);
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  margin-top: 50px; /* 🔹 Add spacing from top */
+}
+
+/* 🔹 Title */
+.todo-title {
+  font-size: 30px;
+  margin-bottom: 15px;
+  text-align: center;
+  color: var(--secondary-color);
+  font-weight: 600;
+  padding: 10px 0;
+  border-bottom: 2px solid var(--accent-color); /* 🔹 Adds an upper tab effect */
+}
+
+/* 🔹 Form adjustments */
+.todo-form {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+/* 🔹 Input */
+.todo-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid var(--primary-color);
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #f7f7f7;
+  transition: all 0.3s ease;
+}
+
+.todo-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+  box-shadow: 0 0 5px var(--accent-color);
+}
+
+/* 🔹 Add Button */
+.todo-add-btn {
+  padding: 12px 20px;
+  background: var(--primary-color);
+  color: var(--white);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.todo-add-btn:hover {
+  background: var(--accent-color);
+}
+
+/* 🔹 Task List */
+.todo-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+/* 🔹 Task Items */
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  border-radius: 12px;
+  background-color: var(--white);
+  margin-bottom: 10px;
+  border: 2px solid var(--accent-color);
+  transition: all 0.3s ease;
+}
+
+.todo-item:hover {
+  transform: translateX(5px);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* 🔹 Completed Tasks */
+.todo-item.completed {
+  background-color: #eaf1f1;
+  opacity: 0.6;
+}
+
+/* 🔹 Checkbox */
+.todo-checkbox-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.todo-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  accent-color: var(--primary-color);
+}
+
+/* 🔹 Task Display */
+.task-display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* 🔹 Task Text */
+.todo-text {
+  flex: 1;
+  padding-right: 15px;
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+/* 🔹 Edit Button */
+.todo-edit-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--accent-color);
+  transition: color 0.3s;
+}
+
+.todo-edit-btn:hover {
+  color: var(--primary-color);
+}
+
+/* 🔹 Save Button */
+.todo-save-btn {
+  background: var(--accent-color);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.todo-save-btn:hover {
+  background: var(--primary-color);
+}
+
+/* 🔹 Toggle Completed Tasks */
+.completed-toggle {
+  cursor: pointer;
+  color: var(--primary-color);
+  text-align: center;
+  font-size: 20px;
+  margin: 10px 0;
+  padding: 10px;
+  border-radius: 8px;
+  background: #e0f7f0;
+  transition: background-color 0.3s ease;
+}
+
+.completed-toggle:hover {
+  background-color: var(--primary-color);
+  color: #fff;
+}
+
+/* 🔹 Completed Tasks */
+.completed-tasks ul {
+  list-style: none;
+  padding: 0;
+}
+
+/* 🔹 Delete Button */
+.todo-delete-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 20px;
+  color: var(--completed-color);
+  transition: color 0.3s;
+}
+
+.todo-delete-btn:hover {
+  color: var(--primary-color);
+}

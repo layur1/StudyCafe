@@ -1,0 +1,18 @@
+# frontend/Dockerfile.dev (for development with hot-reload)
+
+FROM node:20-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files and install dependencies (cached layer)
+COPY package*.json ./
+RUN npm ci  # Use ci for clean install from package-lock.json
+
+# No need to COPY source code here – it will be bind-mounted at runtime
+
+# Expose the dev server port
+EXPOSE 3000
+
+# Run the dev server
+CMD ["npm", "start"]

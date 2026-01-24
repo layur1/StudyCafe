@@ -1,0 +1,160 @@
+/* OnlineMode.css */
+
+/* Resetting margin and padding */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Full-screen layout */
+.online-mode-container {
+  min-height: 100vh; 
+  width: 100vw; 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 40px 40px; /* Top padding for navbar, sides for breathing room, bottom for footer */
+  background: linear-gradient(135deg, #a5c7ec, #86ddcb, #1ABC9C); /* Gradient */
+  background-size: 400% 400%;
+  animation: gradientShift 10s ease infinite; /* Subtle animation */
+  font-family: 'Orienta', sans-serif; /* Consistent with Book.css */
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Subtle overlay for depth */
+.online-mode-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.05);
+  z-index: 1;
+}
+
+/* Ensure content stays above overlay */
+.todo-list-container,
+.pomodoro-timer-container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Background animation */
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Todo List (left side) */
+.todo-list-container {
+  width: 50%; /* Slightly wider for desktop */
+  min-height: 60vh; /* Flexible height */
+  max-height: 650px; /* Adjusted for larger screens */
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid rgba(134, 221, 203, 0.3);
+}
+
+/* Hover effect for todo list */
+.todo-list-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Pomodoro Timer (right side) */
+.pomodoro-timer-container {
+  width: 30%; /* Slightly wider for balance */
+  min-height: 50vh; /* Flexible height */
+  max-height: 500px; /* Adjusted for larger screens */
+  background: linear-gradient(45deg, #1ABC9C, #16A085); /* Gradient */
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-right: 40px; /* Reduced from 200px for better desktop fit */
+  border: 1px solid rgba(22, 160, 133, 0.3);
+}
+
+/* Hover effect for pomodoro timer */
+.pomodoro-timer-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .online-mode-container {
+    padding: 80px 20px 20px; /* Reduced side padding for medium screens */
+  }
+
+  .todo-list-container {
+    width: 55%;
+    max-height: 600px;
+  }
+
+  .pomodoro-timer-container {
+    width: 35%;
+    max-height: 450px;
+    margin-right: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .online-mode-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 70px 15px 15px; /* Adjusted for smaller screens */
+    min-height: auto; /* Allows content to expand naturally */
+  }
+
+  .todo-list-container,
+  .pomodoro-timer-container {
+    width: 90%;
+    min-height: auto;
+    max-height: none;
+    margin-bottom: 20px;
+    margin-right: 0;
+  }
+
+  .todo-list-container {
+    padding: 25px;
+  }
+
+  .pomodoro-timer-container {
+    padding: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .online-mode-container {
+    padding: 60px 10px 10px;
+  }
+
+  .todo-list-container,
+  .pomodoro-timer-container {
+    width: 95%;
+    padding: 20px;
+  }
+}
