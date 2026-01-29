@@ -8,6 +8,7 @@ pipeline {
         BACKEND_IMAGE  = 'studycafe-backend'
 
         IMAGE_TAG = "${BUILD_NUMBER}"
+
         EC2_HOST = "51.21.222.31"
         EC2_USER = "ec2-user"
         APP_DIR  = "/home/ec2-user/studycafe/StudyCafe"
@@ -24,10 +25,10 @@ pipeline {
         stage('Build Frontend Image') {
             steps {
                 sh '''
-                    docker build \
-                      -t ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:${IMAGE_TAG} \
-                      -t ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:latest \
-                      -f frontend/Dockerfile frontend
+                  docker build \
+                    -t ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:${IMAGE_TAG} \
+                    -t ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:latest \
+                    -f frontend/Dockerfile frontend
                 '''
             }
         }
@@ -35,10 +36,10 @@ pipeline {
         stage('Build Backend Image') {
             steps {
                 sh '''
-                    docker build \
-                      -t ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:${IMAGE_TAG} \
-                      -t ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:latest \
-                      -f backend/Dockerfile backend
+                  docker build \
+                    -t ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:${IMAGE_TAG} \
+                    -t ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:latest \
+                    -f backend/Dockerfile backend
                 '''
             }
         }
@@ -51,7 +52,7 @@ pipeline {
                     passwordVariable: 'DOCKER_PASS'
                 )]) {
                     sh '''
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+                      echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
                     '''
                 }
             }
@@ -60,30 +61,30 @@ pipeline {
         stage('Push Images to Docker Hub') {
             steps {
                 sh '''
-                    docker push ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:${IMAGE_TAG}
-                    docker push ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:latest
+                  docker push ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:${IMAGE_TAG}
+                  docker push ${DOCKERHUB_USERNAME}/${FRONTEND_IMAGE}:latest
 
-                    docker push ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:${IMAGE_TAG}
-                    docker push ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:latest
+                  docker push ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:${IMAGE_TAG}
+                  docker push ${DOCKERHUB_USERNAME}/${BACKEND_IMAGE}:latest
                 '''
             }
         }
-    }
 
-    stage('Deploy to EC2') {
-    steps {
-        sshagent(credentials: ['ec2-ssh-key']) {
-            sh """
-              ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
-                cd ${APP_DIR} &&
-                docker compose pull &&
-                docker compose down &&
-                docker compose up -d
-              '
-            """
+        stage('Deploy to EC2') {
+            steps {
+                sshagent(credentials: ['ec2-ssh-key']) {
+                    sh """
+                      ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+                        cd ${APP_DIR} &&
+                        docker compose pull &&
+                        docker compose down &&
+                        docker compose up -d
+                      '
+                    """
+                }
+            }
         }
     }
-}
 
     post {
         success {
