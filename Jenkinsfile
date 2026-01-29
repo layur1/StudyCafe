@@ -8,6 +8,9 @@ pipeline {
         BACKEND_IMAGE  = 'studycafe-backend'
 
         IMAGE_TAG = "${BUILD_NUMBER}"
+        EC2_HOST = "51.21.222.31"
+        EC2_USER = "ec2-user"
+        APP_DIR  = "/home/ec2-user/studycafe/StudyCafe"
     }
 
     stages {
@@ -66,6 +69,21 @@ pipeline {
             }
         }
     }
+
+    stage('Deploy to EC2') {
+    steps {
+        sshagent(credentials: ['ec2-ssh-key']) {
+            sh """
+              ssh -o StrictHostKeyChecking=no ${EC2_USER}@${EC2_HOST} '
+                cd ${APP_DIR} &&
+                docker compose pull &&
+                docker compose down &&
+                docker compose up -d
+              '
+            """
+        }
+    }
+}
 
     post {
         success {
