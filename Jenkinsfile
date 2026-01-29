@@ -16,12 +16,6 @@ pipeline {
 
     stages {
 
-        stage('Checkout Code') {
-            steps {
-                checkout scm
-            }
-        }
-
         stage('Build Frontend Image') {
             steps {
                 sh '''
