@@ -1,18 +1,30 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./SignIn.css";
 
 function SignIn() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:5000';
+  const navigate = useNavigate();
+
+  const API_URL =
+    process.env.REACT_APP_API_URL || "http://localhost:5000";
 
   const handleSignIn = async () => {
     try {
-      await axios.post(`${API_URL}/register`, { username, password });
-      alert("Signed In!");
+      await axios.post(`${API_URL}/register`, {
+        username,
+        password,
+      });
+
+      alert("Signed in successfully!");
+      navigate("/login"); // ✅ go to login page
     } catch (error) {
-      alert("Sign In failed: " + error.response?.data?.message || "Unknown error");
+      alert(
+        "Sign In failed: " +
+          (error.response?.data?.message || "Unknown error")
+      );
     }
   };
 

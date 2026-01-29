@@ -2,27 +2,31 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./Components/Navbar";
-import SignIn from "./Pages/SignIn";
-import Login from "./Pages/Login";
 
-// New imports for pages
+/* Pages */
+import Home from "./Pages/Home/Home";
+import AboutUs from "./Pages/AboutUs/AboutUs";
 import Book from "./Pages/Book/Book";
 import ExploreNow from "./Pages/ExploreNow/ExploreNow";
 import OnlineMode from "./Pages/OnlineMode/OnlineMode";
+import Login from "./Pages/Login";
+import SignIn from "./Pages/SignIn";
 
 function App() {
   return (
     <Router>
-      <Navbar />
+       <Navbar />
       <Routes>
-        <Route path="/" element={<div>Home Page</div>} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/login" element={<Login />} />
-
-        {/* New routes */}
+        {/* Main pages */}
+        <Route path="/" element={<Home />} />
+        <Route path="/about-us" element={<AboutUs />} />
+        <Route path="/explorenow" element={<ExploreNow />} />
         <Route path="/book" element={<Book />} />
-        <Route path="/about-us" element={<ExploreNow />} />
         <Route path="/online-mode" element={<OnlineMode />} />
+
+        {/* Auth */}
+        <Route path="/login" element={<Login />} />
+        <Route path="/sign-in" element={<SignIn />} />
       </Routes>
     </Router>
   );
