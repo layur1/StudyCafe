@@ -23,7 +23,7 @@
 
 /* Solid background when scrolled */
 .outer-div.scrolled {
-  background-color: hsl(211, 77%, 10%);
+  background-color: #06192d;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
