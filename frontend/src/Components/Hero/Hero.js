@@ -21,7 +21,7 @@ const Hero = () => {
       <div className="hero-overlay" />
 
       <header className="hero-content">
-        <h1 className="title">Brew & Brain</h1>
+        <h1 className="title">Layuri Lakmindi</h1>
 
         <p className="description">
           At Brew and Brain, we believe in creating the perfect blend of
